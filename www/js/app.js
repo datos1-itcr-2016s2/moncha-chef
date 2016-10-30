@@ -30,7 +30,7 @@ angular.module('app', ['ionic','ngCordova', 'app.controllers', 'app.routes', 'ap
 
 })
 function login (){
-   OAuth.initialize("Application id");
+   OAuth.initialize('uR4kbKDy8Sa0UwdU3EnhW_bL2d4');
        OAuth.popup('linkedin').done(function(result) {
                     alert (result);
                   result.me().done(function(data) {
@@ -38,3 +38,10 @@ function login (){
                       })
       })
 }
+
+function login2(){
+  OAuth.initialize('uR4kbKDy8Sa0UwdU3EnhW_bL2d4')
+  OAuth.popup('linkedin').done(function(result) {
+        console.log(result)
+    // do some stuff with result
+})}
