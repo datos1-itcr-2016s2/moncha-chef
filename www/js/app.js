@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('app', ['ionic','ngCordova', 'app.controllers', 'app.routes', 'app.directives','app.services',])
+angular.module('app', ['ionic','ngCordova', 'app.controllers', 'app.routes', 'app.directives','app.services','ionicUIRouter'])
 
 .config(function($ionicConfigProvider){
   
@@ -32,16 +32,9 @@ angular.module('app', ['ionic','ngCordova', 'app.controllers', 'app.routes', 'ap
 function login (){
    OAuth.initialize('uR4kbKDy8Sa0UwdU3EnhW_bL2d4');
        OAuth.popup('linkedin').done(function(result) {
-                    alert (result);
+                    //alert (result);
                   result.me().done(function(data) {
-                      alert(data);// do something with `data`, e.g. print data.name
-                      })
-      })
-}
-
-function login2(){
-  OAuth.initialize('uR4kbKDy8Sa0UwdU3EnhW_bL2d4')
-  OAuth.popup('linkedin').done(function(result) {
-        console.log(result)
-    // do some stuff with result
+                      alert(data.name);
+                      });  
 })}
+
