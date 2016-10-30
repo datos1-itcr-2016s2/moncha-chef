@@ -1,0 +1,45 @@
+<ion-view title="Add a New Dish" id="page9">
+  <ion-nav-buttons side="right" class="has-header">
+    <button ui-sref="tabsMaster.orderList_tab1" class="button button-assertive icon ion-android-cancel"></button>
+  </ion-nav-buttons>
+  <ion-content padding="true" class="has-header">
+    <h3 id="addANewDish-heading5" style="color:#000000;">Name of the new dish:</h3>
+    <form id="addANewDish-form12" class="list">
+      <label class="item item-input" id="addANewDish-input9">
+        <input type="text" placeholder="*Example: Barbecue pork*">
+      </label>
+    </form>
+    <h3 id="addANewDish-heading7" style="color:#000000;">Dish ingredients:</h3>
+    <ion-list id="addANewDish-list16">
+      <ion-item id="addANewDish-list-item20">-</ion-item>
+    </ion-list>
+    <div class="spacer" style="width: 300px; height: 9px;"></div>
+    <form id="addANewDish-form14" class="list">
+      <label class="item item-select" id="addANewDish-select1">
+        <span class="input-label">Select Ingredient:</span>
+        <select>
+          <option>Caca</option>
+          <option>Pedo</option>
+        </select>
+      </label>
+      <button id="addANewDish-button26" class="button button-royal  button-block button-outline">Add Ingredient</button>
+    </form>
+    <h3 id="addANewDish-heading6" style="color:#000000;">Recipe steps:</h3>
+    <div id="addANewDish-markdown8">
+      <p style="color:#000000;">-</p>
+    </div>
+    <form id="addANewDish-form13" class="list">
+      <label class="item item-input" id="addANewDish-input10">
+        <input type="text" placeholder="Enter a step">
+      </label>
+    </form>
+    <button id="addANewDish-button23" class="button button-royal  button-block button-outline">Add Step</button>
+    <div id="addANewDish-markdown9">
+      <p style="color:#000000;">Once the data is correct, press
+        <strong>Add</strong> to upload the new dish.</p>
+    </div>
+    <div class="spacer" style="width: 300px; height: 10px;"></div>
+    <button id="addANewDish-button24" class="button button-royal  button-block">Add Dish</button>
+    <a ui-sref="tabsMaster.orderList_tab1" id="addANewDish-button25" class="button button-assertive  button-block button-outline">Cancel</a>
+  </ion-content>
+</ion-view>
