@@ -1,27 +1,20 @@
 <ion-view title="Chat" id="page3" style="background-color:#545466;">
   <ion-content padding="true" class="has-header">
-    <div id="chat-container2">
-      <ion-list id="chat-list9">
-        <ion-item class="item-avatar" id="chat-list-item41">
-          <img src="img/Uri6zp5CS3im2SRyFyJo_12299111_1238011269547475_4025421053635873054_n.jpg">
-          <h2>Chef Joseph:</h2>
-          <p style="white-space:normal;">A ver muchachos necesito los huevos bien cocinados lol</p>
-          <ion-option-button class="button-assertive">Erase</ion-option-button>
-        </ion-item>
-        <ion-item class="item-avatar" id="chat-list-item48">
-          <img src="img/5ACkuvqRlpDJMrx3362g_12548944_1138855579459688_2951769998272146146_n.jpg">
-          <h2>Chef Daniel:</h2>
-          <p style="white-space:normal;">Cállate mae!</p>
-          <ion-option-button class="button-assertive">Erase</ion-option-button>
-        </ion-item>
-      </ion-list>
+    <div class="list">
+      <a class="item item-avatar">
+          <img>
+          <h2>{{chat.user}}</h2>
+          <p>{{chat.message}}</p>
+      </a>
     </div>
-    <form id="chat-form6" class="list">
-      <div class="spacer" style="width: 300px; height: 15px;"></div>
-      <label class="item item-input" id="chat-input8">
-        <input type="text" placeholder="Enter Text Here!">
-      </label>
-      <button id="chat-button21" class="button button-positive  button-block">Send</button>
-    </form>
+    <form>
+        <div class="list">
+            <div class="item item-input-insert">
+              <label class="item-input-wrapper">
+                <input type="text" placeholder="Type the text here :)" ng-model="chat.message">
+              </label>
+              <button class="button button-positive ion ion-ios7-chatbubble" ng-click="sendChat(chat)"></button>
+            </div>
+        </div>
   </ion-content>
 </ion-view>
