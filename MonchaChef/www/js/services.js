@@ -5,7 +5,7 @@ angular.module('app.services', [])
     getMenu: function() {
       var deferred = $q.defer();
       console.log(ServerAPI.getURL);
-      $http.get(ServerAPI.getURL()).then(function(res) {
+      $http.get(ServerAPI.getURL()+"/dishes").then(function(res) {
         //console.dir(res.data);
         deferred.resolve(res.data);
       });
@@ -15,7 +15,7 @@ angular.module('app.services', [])
 
     getDish: function(id) {
       var deferred = $q.defer();
-      $http.get(ServerAPI.getURL()).then(function(res) {
+      $http.get(ServerAPI.getURL()+"/dishes"+id).then(function(res) {
         //console.dir(res.data);
         deferred.resolve(res.data[id - 1]);
       });
@@ -24,12 +24,19 @@ angular.module('app.services', [])
     },
     getIngredients: function() {
       var deferred = $q.defer();
-      ingredients=["papa", "yuca", "tomillo", "sal" , "pimienta", "salsa de tomate"];
-        deferred.resolve(ingredients);
-
-
+      $http.get(ServerAPI.getURL()+"/ingredients").then(function(res) {
+        //console.dir(res.data);
+        deferred.resolve(res.data[id - 1]);
+      });
       return deferred.promise;
     },
+    postDish: function(dishToPost){
+      $http.post(ServerAPI.getURL()+"/dishes", dishToPost).success(function(responseData) {
+        alert(responseData)
+        alert("publicado")
+        //do stuff with response
+      });
+    }
   };
 
 }])
@@ -41,12 +48,12 @@ angular.module('app.services', [])
     defined: false,
     checkPlatform: function(tableCode) {
       if (ionic.Platform.isIOS()) {
-        this.URL = "http://moncha.herokuapp.com/api/dishes/fake";
+        this.URL = "http://moncha.herokuapp.com/api";
       } else if (ionic.Platform.isAndroid()) {
-        this.URL = "http://moncha.herokuapp.com/api/dishes/fake";
+        this.URL = "http://moncha.herokuapp.com/api";
 
       } else {
-        this.URL = "http://192.168.0.105:8100/api/dishes/fake";
+        this.URL = "http://localhost:8100/api";
       }
       this.defined = true;
     },

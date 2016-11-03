@@ -3,16 +3,27 @@
     <button class="button button-assertive icon ion-android-cancel"></button>
   </ion-nav-buttons>
   <ion-content padding="true" class="has-header">
-    <h3  style="color:#000000;">Name of the new dish:</h3>
     <form  class="list">
       <label class="item item-input">
-        <input ng-model="dish.name" type="text" placeholder="*Example: Barbecue pork*">
+        <span class="input-label">Title</span>
+        <input type="text" ng-model="dish.name">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">ID</span>
+        <input type="number" ng-model="dish.id">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Price</span>
+        <input type="number" ng-model="dish.price">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">NutValue</span>
+        <input type="number" ng-model="dish.nutValue">
       </label>
     </form>
-    <h3  style="color:#000000;">Dish ingredients:</h3>
+    <h4  style="color:#000000;">Dish ingredients:</h4>
     <ion-list>
-
-      <ion-item ng-repeat="ingredient in dish.ingredients">{{ingredient}}</ion-item>
+      <ion-item ng-repeat="ingredient in dish.ingredientsList">{{ingredient}}</ion-item>
     </ion-list>
     <div class="spacer" style="width: 300px; height: 9px;"></div>
     <form  class="list">
@@ -22,39 +33,43 @@
           <option ng-repeat="ingredient in ingredients">{{ingredient}}</option>
         </select>
       </label>
+      <label class="item item-input">
+        <span class="input-label">Quantity</span>
+        <input type="number" ng-model="dish.quantity">
+      </label>
       <button ng-click="addIngredient(dish.ingredientToAdd)" class="button button-royal  button-block button-outline">Add Ingredient: {{dish.ingredientToAdd}}</button>
     </form>
     <h3 style="color:#000000;">Recipe steps:</h3>
     <ion-list>
-      <ion-item class="item" ng-repeat="step in dish.steps">
+      <ion-item class="item" ng-repeat="step in dish.recipe">
         <h2>{{step.title}}</h2>
         <p style="white-space:normal;">
-          {{step.instructions}}
+          {{step.description}}
         </p>
         <p style="white-space:normal;">
-          Estimated time:{{step.estimatedTime}}
+          Estimated time:{{step.aproxTime}}
         </p>
       </ion-item>
 
     </ion-list>
     <form  class="list">
       <label class="item item-input">
-        <input type="text" ng-model="dish.stepToAdd.title" placeholder="Step title">
+        <input type="text" ng-model="stepToAdd.title" placeholder="Step title">
       </label>
       <label class="item item-input">
-        <input type="number"  ng-model="dish.stepToAdd.estimatedTime" placeholder="Estimated time in minutes">
+        <input type="number"  ng-model="stepToAdd.aproxTime" placeholder="Estimated time in minutes">
       </label>
       <label class="item item-input" >
-        <textarea name="name"  ng-model="dish.stepToAdd.instructions" rows="8" cols="40" placeholder="Step instructions"></textarea>
+        <textarea name="name"  ng-model="stepToAdd.description" rows="8" cols="40" placeholder="Step instructions"></textarea>
       </label>
     </form>
-    <button class="button button-royal  button-block button-outline" ng-click="addStep(dish.stepToAdd)">Add Step</button>
+    <button class="button button-royal  button-block button-outline" ng-click="addStep(stepToAdd)">Add Step</button>
     <div >
       <p style="color:#000000;">Once the data is correct, press
         <strong>Add</strong> to upload the new dish.</p>
       </div>
       <div class="spacer" style="width: 300px; height: 10px;"></div>
-      <button  class="button button-royal  button-block">Add Dish</button>
+      <button ng-click="postDish()" class="button button-royal  button-block">Add Dish</button>
       <a ng-click="resetDish()" ui-sref="tabsMaster.orderList_tab1"  class="button button-assertive  button-block button-outline">Cancel</a>
     </ion-content>
   </ion-view>

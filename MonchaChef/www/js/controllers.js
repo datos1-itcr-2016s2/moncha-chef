@@ -108,9 +108,10 @@ function ($scope, $stateParams) {
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams, MenuService) {
-   $scope.dish = {steps:[],ingredients:[]};
+   $scope.dish = {recipe:[],ingredientsList:[]};
+   $scope.stepToAdd = {};
    MenuService.getIngredients().then(function(res){
-      $scope.ingredients =res;
+      $scope.ingredients = res;
    });
    //$scope.dish.ingredients = $scope.dish.ingredients + [1 ,2 ];
    $scope.addIngredient = function(ingredient) {
@@ -127,13 +128,13 @@ function ($scope, $stateParams, MenuService) {
             //$scope.dish.ingredientToAdd = "";
          }
          $scope.addStep = function(stepToAdd) {
-            if(stepToAdd.title != undefined && stepToAdd.estimatedTime != undefined && stepToAdd.instructions != undefined){
-               if($scope.dish.steps.indexOf(newStep)<0){var newStep={title:stepToAdd.title, estimatedTime:stepToAdd.estimatedTime,instructions:stepToAdd.instructions}
+            if(stepToAdd.title != undefined && stepToAdd.aproxTime != undefined && stepToAdd.description != undefined){
+               if($scope.dish.recipe.indexOf(newStep)<0){var newStep={title:stepToAdd.title, aproxTime:stepToAdd.aproxTime,description:stepToAdd.description}
                //alert(newStep);
-               $scope.dish.steps.push(newStep);
-               $scope.dish.stepToAdd.title="";
-               $scope.dish.stepToAdd.instructions="";
-               $scope.dish.stepToAdd.estimatedTime="";}
+               $scope.dish.recipe.push(newStep);
+               $scope.stepToAdd.title="";
+               $scope.stepToAdd.description="";
+               $scope.stepToAdd.aproxTime="";}
                else {
                   alert("The step is all ready in the recipe")
                }
@@ -142,10 +143,14 @@ function ($scope, $stateParams, MenuService) {
                alert("Fill all the inputs")
             }
          }
-            $scope.resetDish = function() {
-               $scope.dish = {steps:[],ingredients:[]};
-               //$scope.dish.ingredientToAdd=" ";
-            }
+         $scope.resetDish = function() {
+            $scope.dish = {recipe:[],ingredients:[]};
+            //$scope.dish.ingredientToAdd=" ";
+         }
+         $scope.postDish = function() {
+            //alert($scope.dish);
+            MenuService.postDish($scope.dish);
+         }
 
 
-         }])
+      }])

@@ -3,7 +3,7 @@
   "app_id": "",
   "proxies": [{
       "path": "/api",
-      "proxyUrl": "http://moncha.herokuapp.com/api/"
+      "proxyUrl": "http://moncha.herokuapp.com/api"
     }
   ]
 }
