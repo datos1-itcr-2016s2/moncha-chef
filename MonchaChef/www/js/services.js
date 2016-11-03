@@ -1,5 +1,6 @@
 angular.module('app.services', [])
 
+
 .factory('MenuService', ['$http', '$q', 'ServerAPI', function($http, $q, ServerAPI) {
   return {
     getMenu: function() {
