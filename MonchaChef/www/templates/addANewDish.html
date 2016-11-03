@@ -20,22 +20,25 @@
         <span class="input-label">NutValue</span>
         <input type="number" ng-model="dish.nutValue">
       </label>
+      <label class="item item-input">
+        <span class="input-label">Total time  {{totalTime()}} minutes</span>
+      </label>
     </form>
     <h4  style="color:#000000;">Dish ingredients:</h4>
     <ion-list>
-      <ion-item ng-repeat="ingredient in dish.ingredientsList">{{ingredient}}</ion-item>
+      <ion-item ng-repeat="ingredient in dish.ingredientsList">{{ingredient.name}}</ion-item>
     </ion-list>
     <div class="spacer" style="width: 300px; height: 9px;"></div>
     <form  class="list">
       <label class="item item-select" >
         <span class="input-label">Select Ingredient:</span>
         <select ng-model="dish.ingredientToAdd">
-          <option ng-repeat="ingredient in ingredients">{{ingredient}}</option>
+          <option ng-repeat="ingredient in ingredients">{{ingredient.name}}</option>
         </select>
       </label>
       <label class="item item-input">
         <span class="input-label">Quantity</span>
-        <input type="number" ng-model="dish.quantity">
+        <input type="number" ng-model="newIngredient.quantity">
       </label>
       <button ng-click="addIngredient(dish.ingredientToAdd)" class="button button-royal  button-block button-outline">Add Ingredient: {{dish.ingredientToAdd}}</button>
     </form>

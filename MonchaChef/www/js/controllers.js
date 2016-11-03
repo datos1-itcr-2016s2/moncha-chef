@@ -110,8 +110,11 @@ function ($scope, $stateParams) {
 function ($scope, $stateParams, MenuService) {
    $scope.dish = {recipe:[],ingredientsList:[]};
    $scope.stepToAdd = {};
+   $scope.dish.prepTime=0;
    MenuService.getIngredients().then(function(res){
       $scope.ingredients = res;
+      console.log(res);
+
    });
    //$scope.dish.ingredients = $scope.dish.ingredients + [1 ,2 ];
    $scope.addIngredient = function(ingredient) {
@@ -150,6 +153,17 @@ function ($scope, $stateParams, MenuService) {
          $scope.postDish = function() {
             //alert($scope.dish);
             MenuService.postDish($scope.dish);
+         }
+         $scope.totalTime = function() {
+            var total =0;
+            var len = $scope.dish.recipe.length;
+            if(len>0){
+               for (var i = 0; i < len; i++) {
+                  total+=$scope.dish.recipe[i].aproxTime;
+               }
+            }
+            $scope.dish.prepTime = total;
+            return $scope.dish.prepTime;
          }
 
 
