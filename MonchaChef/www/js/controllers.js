@@ -8,10 +8,10 @@ function ($scope, $stateParams) {
 
 }])
 
-.controller('chatCtrl', ['$scope', '$stateParams','$rootScope',// '$firebaseRefProvider',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('chatCtrl', ['$scope', '$stateParams','$rootScope',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams,$rootScope/*,$firebaseRefProvider*/) {
+function ($scope, $stateParams,$rootScope) {
 /*  FCMPlugin.onNotification(function(data){
     if (data.from == "/topics/chat") {
       $scope.chats.$add({
@@ -19,16 +19,23 @@ function ($scope, $stateParams,$rootScope/*,$firebaseRefProvider*/) {
         message:data.notification.body,
         avatar: data.avatar
     });
-
     }
   });*/
-  $scope.chats = sync.$asArray();
+  //$scope.chats = sync.$asArray()
+  $scope.chats = {e:[],message:[]};
+
   $scope.prueba= function(chat){
-    $scope.chats.$add({
-      user: "daniel",
+
+$scope.chats.e.push({user:["lol"]});
+
+    /*$scope.chats.push({
+      user: "dad",
       message: chat
-  });
-  chat.message = ""
+  });*/
+    //$scope.chats.push({
+      //user: "daniel",
+      //message: "hola"});
+  //chat.message = ""
 }}
 
     /*  var ref = new Firebase('https://moncha-chef-app.firebaseio.com/');
