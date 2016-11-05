@@ -1,16 +1,12 @@
 <ion-view title="Vegetables Inventory" id="page13">
   <ion-nav-buttons side="right" class="has-header">
-    <button class="button icon ion-android-add-circle"></button>
+    <button class="button icon ion-android-add-circle" ui-sref="addProductToINV"></button>
   </ion-nav-buttons>
   <ion-content padding="true" class="has-header">
     <ion-list id="vegetablesInventory-list13">
-      <ion-item id="vegetablesInventory-list-item67">Apple
-        <span class="item-note">Quantity: 1 u.</span>
+      <ion-item ng-repeat="item in items">{{item.name}}
+        <span class="item-note">Quantity: {{item.quantity}} u.</span>
       </ion-item>
-      <ion-item id="vegetablesInventory-list-item68">Pinneapple
-        <span class="item-note">Quantity: 2 u.</span>
-      </ion-item>
-      <ion-item id="vegetablesInventory-list-item69">Watermelon</ion-item>
     </ion-list>
   </ion-content>
 </ion-view>

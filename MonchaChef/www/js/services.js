@@ -1,7 +1,7 @@
 angular.module('app.services', [])
 
 
-.factory('MenuService', ['$http', '$q', 'ServerAPI', function($http, $q, ServerAPI) {
+.factory('MenuService', ['$http', '$q', 'ServerAPI','$rootScope', function($http, $q, ServerAPI,$rootScope) {
   return {
     getMenu: function() {
       var deferred = $q.defer();
@@ -25,7 +25,7 @@ angular.module('app.services', [])
     },
     getIngredients: function() {
       var config = {headers:  {
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZXJ2ZXIiLCJhdWQiOiJjbGllbnQiLCJleHAiOjE0NzgyODg0MzMsImp0aSI6IkUwNE56TXVmbVBMbWVpQWpZUDR4MWciLCJpYXQiOjE0NzgyMDIwMzMsIm5iZiI6MTQ3ODIwMTkxMywic3ViIjoib3JkZXJUYWJsZSIsInVzZXJEYXRhIjoie1wibGlkXCI6bnVsbCxcIm5hbWVcIjpcIlRhdm9cIixcImF2YXRhclwiOm51bGwsXCJ0YWJsZVwiOjAsXCJvcmRlclR5cGVcIjpudWxsLFwicm9sZVwiOlwiQ0hFRlwiLFwiaWRcIjowLFwiZmlyZWJhc2VUb2tlblwiOm51bGx9In0.tzfS-nfv6ZdZO8Q0SyqtDE7Fa0nIPJTjN8Fme9T6ArU',
+        'Authorization': 'Bearer '+$rootScope.token,
       }
     };
     var deferred = $q.defer();
@@ -35,6 +35,23 @@ angular.module('app.services', [])
     return deferred.promise;
 
   },
+
+
+  getIng: function(type) {
+    var config = {headers:  {
+      'Authorization': 'Bearer '+$rootScope.token,
+    }
+  };
+  var deferred = $q.defer();
+  $http.get(ServerAPI.getURL()+"/ingredients/type/"+type, config).then(function(res) {
+    deferred.resolve(res.data);
+  });
+  return deferred.promise;
+
+  },
+
+
+
   postDish: function(dishToPost){
     $http.post(ServerAPI.getURL()+"/dishes", dishToPost).success(function(responseData) {
       alert(responseData)

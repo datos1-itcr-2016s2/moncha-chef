@@ -136,53 +136,95 @@ function ($scope, $stateParams) {
 
 }])
 
-.controller('fruitsInventoryCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('fruitsInventoryCtrl', ['$scope', '$stateParams','$http','$rootScope','MenuService',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
+function ($scope, $stateParams,$http,$rootScope,MenuService) {
 
+  MenuService.getIng("fruits").then(function(res){
+     $scope.items = res;
+     console.log(res);
+     $scope.$apply($scope.items = res);
+
+  });
+}])
+
+.controller('meatsInventoryCtrl', ['$scope', '$stateParams','$http','$rootScope','MenuService', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+// You can include any angular dependencies as parameters for this function
+// TIP: Access Route Parameters for your page via $stateParams.parameterName
+function ($scope, $stateParams,$http,$rootScope,MenuService) {
+
+  MenuService.getIng("meat").then(function(res){
+     $scope.items = res;
+     console.log(res);
+     $scope.$apply($scope.items = res);
+
+  });
+}])
+
+.controller('vegetablesInventoryCtrl', ['$scope', '$stateParams','$http','$rootScope','MenuService', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+// You can include any angular dependencies as parameters for this function
+// TIP: Access Route Parameters for your page via $stateParams.parameterName
+function ($scope, $stateParams,$http,$rootScope,MenuService) {
+
+  MenuService.getIng("vegetable").then(function(res){
+     $scope.items = res;
+     console.log(res);
+     $scope.$apply($scope.items = res);
+
+  });
+}])
+
+.controller('dairyProductsInventoryCtrl', ['$scope', '$stateParams','$http','$rootScope','MenuService', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+// You can include any angular dependencies as parameters for this function
+// TIP: Access Route Parameters for your page via $stateParams.parameterName
+function ($scope, $stateParams,$http,$rootScope,MenuService) {
+  MenuService.getIng("milky").then(function(res){
+     $scope.items = res;
+     console.log(res);
+     $scope.$apply($scope.items = res);
+
+  });
 
 }])
 
-.controller('meatsInventoryCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('grainsInventoryCtrl', ['$scope', '$stateParams','$http','$rootScope','MenuService', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
+function ($scope, $stateParams,$http,$rootScope,MenuService) {
+  MenuService.getIng("grains").then(function(res){
+     $scope.items = res;
+     console.log(res);
+     $scope.$apply($scope.items = res);
 
+  });
 
 }])
 
-.controller('vegetablesInventoryCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('addProductToINVCtrl', ['$scope', '$stateParams','$http','$rootScope','$state', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
+function ($scope, $stateParams, $http,$rootScope,$state) {
+  $scope.addIng = function(inname,intype,inquantity){
+    if (inname == undefined || intype == undefined || inquantity == undefined){
+      alert("Please fill all the spaces.")
+    }else{
+      $http({
+        method: 'POST',
+        url: 'http://moncha.herokuapp.com/api/ingredients/',
+        data: {name:inname, quantity:inquantity, type:intype},
+        headers: {
+          'Authorization': "Bearer " + $rootScope.token
+        },
+      }).then(function successCallback(response) {
+        $state.go('tabsMaster.foodInventory');
+        alert("Ingredient Submitted");
+      },function errorCallback(response) {
+          alert("Error: Try again later");
 
-
-}])
-
-.controller('dairyProductsInventoryCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
-// You can include any angular dependencies as parameters for this function
-// TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
-
-
-}])
-
-.controller('grainsInventoryCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
-// You can include any angular dependencies as parameters for this function
-// TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
-
-
-}])
-
-.controller('addProductToINVCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
-// You can include any angular dependencies as parameters for this function
-// TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
-
-
-}])
+        });
+      };
+}}])
 
 .controller('addANewDishCtrl', ['$scope', '$stateParams','MenuService', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function

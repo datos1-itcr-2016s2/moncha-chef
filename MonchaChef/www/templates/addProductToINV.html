@@ -1,3 +1,41 @@
 <ion-view title="Add Product to INV" id="page16">
-  <ion-content padding="true" class="has-header"></ion-content>
+  <ion-nav-buttons side="right" class="has-header">
+    <button class="button button-assertive icon ion-android-cancel" ui-sref="tabsMaster.foodInventory" ng-click="resetDish()"></button>
+  </ion-nav-buttons>
+  <ion-content padding="true" class="has-header">
+
+  <form id="configuration-form8" class="list">
+    <h2 id="configuration-heading4" style="color:#000000;font-weight:400;">New Ingredient</h2>
+    <label class="item item-input" id="configuration-input11">
+<span class="input-label" >Ingredient's Name:</span>
+      <input type="text" ng-model="name" >
+    </label>
+
+  <form  class="list">
+
+    <label class="item item-select" >
+      <span class="input-label">Select Ingredient Type:</span>
+
+        <select ng-model="type" >
+        <option selected>fruits</option>
+        <option>vegetable</option>
+        <option>meat</option>
+        <option>grains</option>
+        <option>milky</option>
+        </select>
+
+
+    </label>
+    <label class="item item-input">
+      <span class="input-label">Quantity:</span>
+      <input type="number" ng-model="quantity">
+    </label>
+  </form>
+
+
+
+
+  <button id="configuration-button22" ng-click="addIng(name,type,quantity)"
+  class="button button-royal  button-block">Add to Inventory</button>
+  </ion-content>
 </ion-view>
