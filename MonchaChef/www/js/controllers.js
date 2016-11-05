@@ -1,12 +1,27 @@
 angular.module('app.controllers', ['ngCordovaOauth','ionic'])
 
-.controller('orderListCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('orderListCtrl', ['$scope', '$stateParams','orderService', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
-
+function ($scope, $stateParams, userData, orderService) {
+$scope.orders=[];
+orderService.getOrders().then(function(res){
+  var newOrders = res;
+  for (var i = 0; i < newOrders.length; i++) {
+    if(newOrders[i].completed == false){
+      $scope.orders.push(newOrders[i])
+    }
+  }
 
 }])
+
+
+
+
+
+
+
+
 
 .controller('chatCtrl', ['$scope', '$stateParams','$rootScope','$http',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 function ($scope, $stateParams,$rootScope,$http) {

@@ -1,9 +1,24 @@
 <ion-view title="Order List" id="page2">
-  <ion-content padding="true" class="has-header">
-    <ion-list id="orderList-list3">
-      <ion-item id="orderList-list-item12">designed</ion-item>
-      <ion-item id="orderList-list-item13">Item 2</ion-item>
-      <ion-item id="orderList-list-item14">Item 3</ion-item>
-    </ion-list>
-  </ion-content>
-</ion-view>
+      <ion-content padding="true" class="has-header">
+          <div id="orderStatus-container14">
+              <ion-list>
+                  <ion-item ng-repeat="order in orders">
+                      <ion-list>
+                          <ion-item ng-repeat="suborder in order.suborders">
+                              {{suborder.name}}
+                              <ion-list>
+                                  <ion-item class="item item-icon-left" ng-repeat="stepComb in suborder.steps">
+                                      <i class={{getIcon(stepComb.completed)}}></i>
+                                      <h2>{{stepComb.step.title}}</h2>
+                                      <p style="white-space:normal;">
+                                          Estimated time:{{stepComb.step.time}}
+                                      </p>
+                                  </ion-item>
+                              </ion-list>
+                          </ion-item>
+                      </ion-list>
+                  </ion-item>
+              </ion-list>
+          </div>
+      </ion-content>
+  </ion-view>

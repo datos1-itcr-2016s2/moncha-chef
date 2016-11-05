@@ -91,3 +91,25 @@ angular.module('app.services', [])
   }
 
 }])
+
+
+
+.service('orderService', ['$http','$q', 'ServerAPI', function($http, $q, ServerAPI, $rootScope) {
+  return {
+    getOrders: function() {
+      //console.log("TOKEN", token);
+      var bearerToken = "Bearer "+ $rootScope.token;
+      //console.log("Bearer", bearerToken);
+      var config = {headers:  {
+        'Authorization': bearerToken
+      }};
+      var deferred = $q.defer();
+      $http.get(ServerAPI.getURL()+"/orders",config).then(function(res) {
+        //console.dir(res.data);
+        deferred.resolve(res.data);
+      });
+      return deferred.promise;
+    }
+
+  };
+}])
