@@ -8,8 +8,8 @@ function ($scope, $stateParams) {
 
 }])
 
-.controller('chatCtrl', ['$scope', '$stateParams','$rootScope',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
-function ($scope, $stateParams,$rootScope) {
+.controller('chatCtrl', ['$scope', '$stateParams','$rootScope','$http',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+function ($scope, $stateParams,$rootScope,$http) {
   $scope.chats = [];
 
 FCMPlugin.onNotification(function(data){
@@ -24,10 +24,19 @@ FCMPlugin.onNotification(function(data){
   });
 
   $scope.prueba= function(messages){
-    $scope.chats.push({avatar:"https:media.licdn.com/mpr/mpr/shrinknp_400_400/AAEAAQAAAAAAAAjsAAAAJGMzNjk0MTRiLWYzNzMtNDY3OS05Zjk3LTA3Y2Y2MjBhMDExYw.jpg",
-    user:"Daniel Castro",
-    messages:messages});
-    $scope.chat.message = "";
+    $http({
+        method: 'POST',
+        url: 'http://moncha.herokuapp.com/api/chat',
+        data: messages,
+        headers: {
+          'Authorization': "Bearer " + $rootScope.token,
+          'Content-Type': 'text/plain'
+        },
+      }).then(function successCallback(response) {
+          console.log(response);
+        }, function errorCallback(response) {
+          console.log(response);
+        });
 }}
 ])
 
@@ -47,10 +56,10 @@ function ($scope, $stateParams) {
 
 }])
 
-.controller('chefLogInCtrl', ['$scope','$http', '$stateParams','$state','$rootScope',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('chefLogInCtrl', ['$scope','$http', '$stateParams','$state', '$ionicLoading', '$rootScope',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $http, $stateParams, $state, $rootScope, $cordovaOauth) {
+function ($scope, $http, $stateParams, $state, $ionicLoading, $rootScope, $cordovaOauth) {
   $scope.login= function(){
       FCMPlugin.getToken(
         function(token){
@@ -70,8 +79,16 @@ function ($scope, $http, $stateParams, $state, $rootScope, $cordovaOauth) {
       )
      OAuth.initialize('uR4kbKDy8Sa0UwdU3EnhW_bL2d4');
        OAuth.popup('linkedin').done(function(result) {
-                  alert (result);
+                  //alert (result);
                   result.me().done(function(data) {
+
+                  $ionicLoading.show({
+                    content: 'Loading',
+                    animation: 'fade-in',
+                    showBackdrop: true,
+                    maxWidth: 200,
+                    showDelay: 0
+                  });
                       $http({
                           method: 'POST',
                           url: 'http://moncha.herokuapp.com/api/auth/chef',
@@ -82,9 +99,10 @@ function ($scope, $http, $stateParams, $state, $rootScope, $cordovaOauth) {
                               alert("An error occured while logging in");
                             } else {
                               $rootScope.token = response.data;
+                              $ionicLoading.hide();
                               $state.go('tabsMaster.chat');
                             }
-                            alert("lo mando al server");
+                            //alert("lo mando al server");
                             // this callback will be called asynchronously
                             // when the response is available
                           }, function errorCallback(response) {
@@ -92,6 +110,8 @@ function ($scope, $http, $stateParams, $state, $rootScope, $cordovaOauth) {
                             // called asynchronously if an error occurs
                             // or server returns response with an error status.
                           });
+
+
                        });
   })
 }
