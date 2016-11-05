@@ -9,45 +9,26 @@ function ($scope, $stateParams) {
 }])
 
 .controller('chatCtrl', ['$scope', '$stateParams','$rootScope',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
-// You can include any angular dependencies as parameters for this function
-// TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams,$rootScope) {
-/*  FCMPlugin.onNotification(function(data){
+  $scope.chats = [];
+
+FCMPlugin.onNotification(function(data){
     if (data.from == "/topics/chat") {
-      $scope.chats.$add({
-        user: data.name,
-        message:data.notification.body,
-        avatar: data.avatar
-    });
+      $scope.$apply(function(){
+        $scope.chats.push({
+          avatar:data.avatar,
+          user:"Chef "+data.name,
+          messages:data.notification.body});
+      });
     }
-  });*/
-  //$scope.chats = sync.$asArray()
-  $scope.chats = {e:[],message:[]};
+  });
 
-  $scope.prueba= function(chat){
-
-$scope.chats.e.push({user:["lol"]});
-
-    /*$scope.chats.push({
-      user: "dad",
-      message: chat
-  });*/
-    //$scope.chats.push({
-      //user: "daniel",
-      //message: "hola"});
-  //chat.message = ""
+  $scope.prueba= function(messages){
+    $scope.chats.push({avatar:"https:media.licdn.com/mpr/mpr/shrinknp_400_400/AAEAAQAAAAAAAAjsAAAAJGMzNjk0MTRiLWYzNzMtNDY3OS05Zjk3LTA3Y2Y2MjBhMDExYw.jpg",
+    user:"Daniel Castro",
+    messages:messages});
+    $scope.chat.message = "";
 }}
-
-    /*  var ref = new Firebase('https://moncha-chef-app.firebaseio.com/');
-      var sync = $firebaseRefProvider(ref);
-      $scope.chats = sync.$asArray();
-      $scope.sendChat = function(chat){
-          $scope.chats.$add({
-            user: 'Guest',
-            message:chat.message
-        });
-        chat.message = "";
-      }*/
 ])
 
 .controller('foodInventoryCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller

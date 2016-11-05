@@ -1,9 +1,10 @@
 <ion-view title="chats" id="page3">
   <ion-content padding="false" class="has-header">
       <ion-list>
-        <ion-item ng-repeat="chat in chats">
-          <h2>{{chat.e.user}}</h2>
-          <p>{{chat.message}}</p>
+        <ion-item class="item item-avatar" ng-repeat="chat in chats">
+          <img src={{chat.avatar}}>
+          <h2>{{chat.user}}:</h2>
+          <p>{{chat.messages}}</p>
         </ion-item>
       </ion-list>
     <form>
@@ -12,8 +13,7 @@
               <label class="item-input-wrapper">
                 <input type="text" placeholder="Type the text here :)" ng-model="chat.message">
               </label>
-              <button class="button button-positive" ng-click="prueba(chat)"></button>
-
+              <button class="button button-royal  button-block" ng-click="prueba(chat.message)">Send</button>
             </div>
         </div>
       </form>
