@@ -50,7 +50,7 @@
           {{step.description}}
         </p>
         <p style="white-space:normal;">
-          Estimated time:{{step.aproxTime}}
+          Estimated time:{{step.time}}
         </p>
       </ion-item>
 
@@ -60,7 +60,7 @@
         <input type="text" ng-model="stepToAdd.title" placeholder="Step title">
       </label>
       <label class="item item-input">
-        <input type="number"  ng-model="stepToAdd.aproxTime" placeholder="Estimated time in minutes">
+        <input type="number"  ng-model="stepToAdd.time" placeholder="Estimated time in minutes">
       </label>
       <label class="item item-input" >
         <textarea name="name"  ng-model="stepToAdd.description" rows="8" cols="40" placeholder="Step instructions"></textarea>

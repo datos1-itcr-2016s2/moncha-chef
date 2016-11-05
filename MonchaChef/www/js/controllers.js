@@ -258,13 +258,13 @@ function ($scope, $stateParams, MenuService) {
          //$scope.dish.ingredientToAdd = "";
       }
       $scope.addStep = function(stepToAdd) {
-         if(stepToAdd.title != undefined && stepToAdd.aproxTime != undefined && stepToAdd.description != undefined){
-            if($scope.dish.recipe.indexOf(newStep)<0){var newStep={title:stepToAdd.title, aproxTime:stepToAdd.aproxTime,description:stepToAdd.description}
+         if(stepToAdd.title != undefined && stepToAdd.time != undefined && stepToAdd.description != undefined){
+            if($scope.dish.recipe.indexOf(newStep)<0){var newStep={title:stepToAdd.title, time:stepToAdd.time,description:stepToAdd.description}
             //alert(newStep);
             $scope.dish.recipe.push(newStep);
             $scope.stepToAdd.title="";
             $scope.stepToAdd.description="";
-            $scope.stepToAdd.aproxTime="";}
+            $scope.stepToAdd.time="";}
             else {
                alert("The step is all ready in the recipe")
             }
@@ -286,7 +286,7 @@ function ($scope, $stateParams, MenuService) {
          var len = $scope.dish.recipe.length;
          if(len>0){
             for (var i = 0; i < len; i++) {
-               total+=$scope.dish.recipe[i].aproxTime;
+               total+=$scope.dish.recipe[i].time;
             }
          }
          $scope.dish.prepTime = total;
